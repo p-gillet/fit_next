@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:postgres/postgres.dart';
 
+// Only use this when getDBConnection has been called once
+PostgreSQLConnection? dbConnection;
+
+// Singleton to get open connection object
+Future<dynamic> getDBConnection() {
+  dbConnection ??= PostgreSQLConnection("localhost", 5432, "bdr",
+      username: "bdr", password: "bdr");
+
+  if (dbConnection!.isClosed) {
+    return dbConnection!.open();
+  }
+
+  return Future<PostgreSQLConnection>(
+      () => dbConnection as PostgreSQLConnection);
+}
+
 void main() {
   runApp(const MyApp());
 }
@@ -43,102 +59,98 @@ class CRUDTableState extends State<CRUDTable> {
   void initState() {
     super.initState();
 
-    var connection = PostgreSQLConnection("localhost", 5432, "bdr",
-        username: "bdr", password: "bdr");
-
-    connection.open().then((conn) {
-      conn.mappedResultsQuery("SELECT * FROM fitnext.coach;").then((res) {
-        var columnPrinted = false;
-        for (var element in res) {
-          for (var val in element.values) {
-            if (!columnPrinted) {
-              columnPrinted = true;
-              for (var a in val.keys) {
-                print(a);
-              }
-            }
-            print(val);
-          }
-        }
-      });
-    });
+    fetchTableData = getDBConnection().then((val) => dbConnection!
+        .mappedResultsQuery("SELECT * FROM fitnext.${widget.tableName};"));
   }
+
+  late Future<List<Map<String, Map<String, dynamic>>>> fetchTableData;
+  List<DataColumn> columns = [];
+  List<DataRow> rows = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("test"),
-      ),
-      body: Center(
-          child: ListView(children: [
-        DataTable(
-          columns: const [
-            DataColumn(label: Text('ID')),
-            DataColumn(label: Text('Name')),
-            DataColumn(label: Text('Age')),
-          ],
-          rows: const [
-            DataRow(
-              cells: [
-                DataCell(Text('1')),
-                DataCell(Text('John')),
-                DataCell(Text('20')),
-              ],
-            ),
-            DataRow(
-              cells: [
-                DataCell(Text('2')),
-                DataCell(Text('Robert')),
-                DataCell(Text('25')),
-              ],
-            ),
-          ],
+        appBar: AppBar(
+          title: Text("Infos de la table ${widget.tableName}"),
         ),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back!'),
-        ),
-      ])),
-    );
+        body: ListView(padding: const EdgeInsets.all(30), children: [
+          FutureBuilder<List<Map<String, Map<String, dynamic>>>>(
+            future: fetchTableData,
+            builder: ((context, snapshot) {
+              if (snapshot.hasData) {
+                // Build table UI
+                rows = [];
+
+                for (var tableData in snapshot.data!) {
+                  for (var rowData in tableData.values) {
+                    // Add columns name
+                    if (columns.isEmpty) {
+                      columns = [];
+                      for (var colName in rowData.keys) {
+                        columns.add(DataColumn(label: Text(colName)));
+                      }
+                    }
+
+                    // Add table data
+                    List<DataCell> cells = [];
+
+                    for (var cellData in rowData.values) {
+                      cells.add(DataCell(Text(cellData.toString())));
+                    }
+
+                    rows.add(
+                      DataRow(
+                        cells: cells,
+                      ),
+                    );
+                  }
+                }
+
+                return DataTable(
+                  columns: columns,
+                  rows: rows,
+                );
+              } else if (snapshot.hasError) {
+                return Column(
+                  children: [
+                    const Icon(
+                      Icons.error_outline,
+                      color: Colors.red,
+                      size: 60,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Text('Error: ${snapshot.error}'),
+                    ),
+                  ],
+                );
+              } else {
+                return Column(children: const [
+                  SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: CircularProgressIndicator(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: Text('Chargement...'),
+                  ),
+                ]);
+              }
+            }),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Go back!'),
+          ),
+        ]));
   }
-}
-
-/// The base class for the different types of items the list can contain.
-abstract class ListItem {
-  /// The title line to show in a list item.
-  Widget buildTitle(BuildContext context);
-
-  /// The subtitle line, if any, to show in a list item.
-  Widget buildSubtitle(BuildContext context);
-}
-
-/// A ListItem that contains data to display a heading.
-class HeadingItem implements ListItem {
-  final String heading;
-
-  HeadingItem(this.heading);
-
-  @override
-  Widget buildTitle(BuildContext context) {
-    return Text(
-      heading,
-      style: Theme.of(context).textTheme.headline5,
-    );
-  }
-
-  @override
-  Widget buildSubtitle(BuildContext context) => const SizedBox.shrink();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  PostgreSQLConnection connection = PostgreSQLConnection(
-      "localhost", 5432, "bdr",
-      username: "bdr", password: "bdr");
-  List<ListItem> items = [];
 
   void _incrementCounter() {
     setState(() {
@@ -150,28 +162,20 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    fetchTables = connection.open().then((val) => connection
+    fetchTables = getDBConnection().then((val) => dbConnection!
             .mappedResultsQuery(
                 "SELECT table_name FROM information_schema.tables WHERE table_schema = 'fitnext';")
             .then((res) {
           List<String> tableNames = [];
 
           // Get all table names
-          for (var element in res) {
-            for (var val in element.values) {
-              tableNames.add(val["table_name"]);
+          for (var tableData in res) {
+            for (var rowData in tableData.values) {
+              tableNames.add(rowData["table_name"]);
             }
           }
 
           return tableNames;
-
-          /*// Build UI items
-          items = List<ListItem>.generate(
-            1000,
-            (i) => i % 6 == 0
-                ? HeadingItem('Heading $i')
-                : MessageItem('Sender $i', 'Message body $i'),
-          );*/
         }));
   }
 
@@ -209,12 +213,6 @@ class _MyHomePageState extends State<MyHomePage> {
             builder: ((context, snapshot) {
               List<Widget> children;
               if (snapshot.hasData) {
-                // Build UI items
-                items = List<ListItem>.generate(
-                  snapshot.data?.length as int,
-                  (i) => HeadingItem('${snapshot.data?[i]}'),
-                );
-
                 children = <Widget>[
                   Row(children: const [
                     Text("Connecté à la base de données"),
@@ -227,13 +225,20 @@ class _MyHomePageState extends State<MyHomePage> {
                   ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    itemCount: items.length,
+                    itemCount: snapshot.data?.length,
                     itemBuilder: (context, index) {
-                      final item = items[index];
+                      final tableName = snapshot.data?[index] as String;
 
-                      return ListTile(
-                        title: item.buildTitle(context),
-                        subtitle: item.buildSubtitle(context),
+                      return GestureDetector(
+                        child: ListTile(title: Text(tableName)),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    CRUDTable(tableName: tableName)),
+                          );
+                        },
                       );
                     },
                   ),
@@ -274,49 +279,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ));
             }),
           )
-        ]
-
-            /*
-          [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Liste des tables dans la base de données'),
-            ),
-            ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                final item = items[index];
-
-                return ListTile(
-                  title: item.buildTitle(context),
-                  subtitle: item.buildSubtitle(context),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return MaterialApp(
-                    home: const CRUDTable(tableName: 'coach'),
-                  );
-                }));
-              },
-            ),
-            ListTile(
-              title: const Text('Item 2'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-          ],*/
-
-            ),
+        ]),
       ),
     );
   }
