@@ -20,3 +20,19 @@ $router->get('/', function () use ($router) {
 $router->get('abonne/{id}', [
     'as' => 'profile', 'uses' => 'AbonneController@show'
 ]);
+
+$router->get('adresse/create', [
+    'as' => 'profile', 'uses' => 'AdresseController@create'
+]);
+
+$router->post('adresse', [
+    'as' => 'profile', 'uses' => 'AdresseController@store'
+]);
+
+$router->get('adresses', [
+    'as' => 'profile', 'uses' => 'AdresseController@index'
+]);
+
+$router->get('adresse/{id}', [
+    'as' => 'profile', 'uses' => 'AdresseController@show'
+]);
