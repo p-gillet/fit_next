@@ -6,10 +6,12 @@
     "type": "project",
     "require": {
         "php": "^8.0",
+        "doctrine/dbal": "^3.5",
         "laravel/lumen-framework": "^9.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
+        "krlove/eloquent-model-generator": "^2.0",
         "mockery/mockery": "^1.4.4",
         "phpunit/phpunit": "^9.5.10"
     },
