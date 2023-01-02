@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Materielfitness[] $materielfitnesses
  * @property AbonneCourscollectif[] $abonneCourscollectifs
  */
-class abonne extends Model
+class Abonne extends Model
 {
     /**
      * The table associated with the model.

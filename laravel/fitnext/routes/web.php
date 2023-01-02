@@ -17,6 +17,6 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('user/{id}', [
-    'as' => 'profile', 'uses' => 'Controller@show'
+$router->get('abonne/{id}', [
+    'as' => 'profile', 'uses' => 'AbonneController@show'
 ]);
