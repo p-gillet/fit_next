@@ -13,9 +13,9 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+$router->get('/', [
+    'as' => 'profile', 'uses' => 'HomeController@index'
+]);
 
 $router->get('abonne/{id}', [
     'as' => 'profile', 'uses' => 'AbonneController@show'
