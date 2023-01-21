@@ -1,4 +1,8 @@
-<a href="/">Retour à l'index</a>
+@extends('layouts.main')
+
+@section('title', $tableName)
+
+@section('content')
 
 <h1>Affichage de la table <?= $tableName?></h1>
 
@@ -21,3 +25,20 @@
    <?php endforeach; ?>
 </tbody>
 </table>
+
+<style>
+   td {
+      background-color: #fff;
+      padding: 10px;
+      transition: .5s;
+   }
+
+   tr:nth-child(even) > td {
+      background-color: #fee;
+   }
+
+   tr:hover > td {
+      background-color: bisque !important;
+      transition: .1s;
+   }
+</style>
