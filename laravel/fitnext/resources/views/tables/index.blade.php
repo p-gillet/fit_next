@@ -25,27 +25,34 @@
    <?php foreach ($data as $row): ?>
       <tr>
       <?php foreach ($fields as $field): ?>
-      <td><?=$row->$field?></td>
+         <td><?=$row->$field?></td>
       <?php endforeach; ?>
-      <td class="modifyDelete modify" onClick="onEdit()">Modifier</td>
-      <td class="modifyDelete delete" onClick="onDelete()">Supprimer</td>
+      <td class="modifyDelete modify" onClick="onEdit('<?=$row->getKeyName()?>')">Modifier</td>
+      <td class="modifyDelete delete" onClick="onDelete('<?=$row->getKeyName()?>', '<?=$row->getKey()?>')">Supprimer</td>
       </tr>
    <?php endforeach; ?>
 </tbody>
 </table>
 
 <script>
-   const onEdit = () => {
+   const onEdit = ($keyName) => {
       window.location.href='/<?=$tableName?>/edit';
    }
 
-   const onDelete = async () => {
+   const onDelete = async (keyName, keyValue) => {
       await fetch('/<?=$tableName?>/delete', {
-         method: 'delete'
+         method: 'delete',
+         headers: {
+            'Content-Type': "application/json"
+         },
+         body: JSON.stringify({
+            keyName,
+            keyValue,
+         })
       });
 
       // Refresh page
-      window.location.href='/<?=$tableName?>';
+      //window.location.href='/<?=$tableName?>';
    }
 </script>
 

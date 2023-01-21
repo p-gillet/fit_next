@@ -4,14 +4,23 @@ namespace App\Http\Controllers;
 
 use Schema;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
+
+use DB;
+
 class TableController extends Controller
 {
-   public function index($tableName) {
-      // Récupère la classe Model à partir du nom de la table
-      $modelClass = 'App\Models\\' . ucfirst($tableName);
+   public static function getModelClassFromName($modelName) {
+      $modelClass = 'App\Models\\' . ucfirst($modelName);
       if (!class_exists($modelClass)) {
-         return 'La table ' . $tableName . ' n\'existe pas !';
+         return 'La table ' . $modelName . ' n\'existe pas !';
       }
+      return $modelClass;
+   }
+
+   public function index($tableName) {
+      $modelClass = $this->getModelClassFromName($tableName);
 
       return view('tables.index', [
          'tableName' => $tableName,
@@ -46,9 +55,27 @@ class TableController extends Controller
       return $this->index($tableName);
    }
 
-   public function delete($tableName) {
-      //TODO
+   public function delete(Request $request, $tableName) {
+      $availableTables = HomeController::getDBModels();
 
-      return $this->index($tableName);
+      if (!in_array($tableName , $availableTables)) {
+         return 'La table '.$tableName.' n\'existe pas !';
+      }
+
+      $reqJson = json_decode($request->getContent());
+
+      // Validate request body
+      if(!property_exists($reqJson, 'keyValue') || !property_exists($reqJson, 'keyName')) {
+         return 'Error, body request must be json and give "keyValue" and "keyName" attributes';
+      }
+
+      // 100% without any SQL injection
+      try {
+         DB::statement("DELETE FROM ".$tableName." WHERE ".$reqJson->keyName." = ".$reqJson->keyValue.";");
+      } catch (\Throwable $e) {
+         return $e->getMessage();
+      }
+
+      return 'Delete sucessfull ('.$reqJson->keyName.'='.$reqJson->keyValue.')';
    }
 }
