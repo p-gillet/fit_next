@@ -13,22 +13,19 @@ class CoachController extends Controller
     }
 
     public function index(){
-        return view('adresse.index', [
-            'adresses' => Adresse::all()
+        return view('coach.index', [
+            'coachs' => Coach::all()
         ]);
     }
 
     public function create(){
-        return view('adresse.create');
+        return view('coach.create');
     }
 
     public function store(){
-        $adresse = new Adresse();
-        $adresse->ville = request('ville');
-        $adresse->codepostale = request('codepostale');
-        $adresse->rue = request('rue');
-        $adresse->numeroderue = request('numeroderue');
-        $adresse->save();
-        return redirect('/adresses');
+        $coach = new Coach();
+        $coach->nom = request('nom');
+        $coach->save();
+        return redirect('/coachs');
     }
 }
