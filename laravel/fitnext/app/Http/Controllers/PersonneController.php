@@ -22,6 +22,21 @@ class PersonneController extends Controller
         return view('personne.create');
     }
 
+    public function edit($id){
+        return view('personne.edit', [
+            'personne' => Personne::findOrFail($id)
+        ]);
+    }
+
+    public function update($id){
+        $personne = Personne::findOrFail($id);
+        $personne->nom = request('nom');
+        $personne->prenom = request('prenom');
+        $personne->datenaissance = request('datenaissance');
+        $personne->save();
+        return redirect('/personnes');
+    }
+
     public function store(){
         $personne = new Personne();
         $personne->nom = request('nom');

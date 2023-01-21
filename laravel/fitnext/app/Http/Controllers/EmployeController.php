@@ -22,6 +22,21 @@ class EmployeController extends Controller
         return view('employe.create');
     }
 
+    public function edit($id){
+        return view('employe.edit', [
+            'employe' => Employe::findOrFail($id)
+        ]);
+    }
+
+    public function update($id){
+        $employe = Employe::findOrFail($id);
+        $employe->nom = request('nom');
+        $employe->prenom = request('prenom');
+        $employe->datenaissance = request('datenaissance');
+        $employe->save();
+        return redirect('/employes');
+    }
+
     public function store(){
         $employe = new Employe();
         $employe->nom = request('nom');
