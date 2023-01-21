@@ -19,7 +19,9 @@ class PersonneController extends Controller
     }
 
     public function create(){
-        return view('personne.create');
+        return view('personne.create', [
+            'adresses' => Adresse::all()
+        ]);
     }
 
     public function edit($id){
