@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 class HomeController extends Controller
 {
-   public function index() {
-      // List all models of DB
-
+   // List all models of DB
+   public static function getDBModels() {
       // Get all files in directory
       $path = "../app/Models";
       $files = array_diff(scandir($path), array('.', '..'));
@@ -18,6 +17,10 @@ class HomeController extends Controller
          $filename = strtolower($filename);
       }
 
-      return view('home.index', ['models' => $files]);
+      return $files;
+   }
+
+   public function index() {
+      return view('home.index', ['models' => $this->getDBModels()]);
   }
 }

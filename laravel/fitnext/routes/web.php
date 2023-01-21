@@ -13,24 +13,36 @@
 |
 */
 
+/* ------------- Index ------------- */
 $router->get('/', [
     'as' => 'profile', 'uses' => 'HomeController@index'
 ]);
 
-$router->get('abonne/{id}', [
-    'as' => 'profile', 'uses' => 'AbonneController@show'
+/* ------------- SQL tables routing ------------- */
+// Create
+$router->get('/{tableName}/create', [
+    'as' => 'profile', 'uses' => 'TableController@create'
+]);
+$router->post('/{tableName}/store', [
+    'as' => 'profile', 'uses' => 'TableController@store'
 ]);
 
-$router->get('adresse/create', [
-    'as' => 'profile', 'uses' => 'AdresseController@create'
+// Read
+$router->get('/{tableName}', [
+    'as' => 'profile', 'uses' => 'TableController@index'
 ]);
 
-$router->post('adresse', [
-    'as' => 'profile', 'uses' => 'AdresseController@store'
+// Update
+$router->get('/{tableName}/edit', [
+    'as' => 'profile', 'uses' => 'TableController@edit'
+]);
+$router->patch('/{tableName}/update', [
+    'as' => 'profile', 'uses' => 'TableController@update'
 ]);
 
-$router->get('adresses', [
-    'as' => 'profile', 'uses' => 'AdresseController@index'
+// Delete
+$router->delete('/{tableName}/delete', [
+    'as' => 'profile', 'uses' => 'TableController@delete'
 ]);
 
 $router->get('adresse/{id}', [

@@ -8,7 +8,7 @@
       <h1>Afficher une table</h1>
       <div class="tables">
          <?php foreach ($models as $model): ?>
-            <a class="tableLink" href="/<?= $model?>s"><?= $model ?></a>
+            <a class="tableLink" href="/<?= $model?>"><?= $model ?></a>
          <?php endforeach; ?>
       </div>
    </div>
