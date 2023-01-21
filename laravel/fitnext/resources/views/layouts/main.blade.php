@@ -53,12 +53,28 @@
          font-size: 35px;
          transition: .3s;
          font-family: 'Bebas Neue', sans-serif;
+         user-select: none;
       }
 
       #main-header a:hover {
          letter-spacing: 3px;
          cursor: pointer;
          color: coral;
+      }
+
+      .btn {
+         border-radius: 5px;
+         padding: 8px;
+         background-color: white;
+         transition: .4s;
+         border-style: none;
+         text-decoration: none;
+         user-select: none;
+      }
+
+      .btn:hover {
+         background-color: coral;
+         transition: .2s;
       }
    </style>
    </body>

@@ -4,14 +4,18 @@
 
 @section('content')
 
-<h1>Affichage de la table <?= $tableName?></h1>
+<h1>Table <?= $tableName?></h1>
 
-<table>
+<a class="btn btn-add" href="/">Ajouter une ligne</a>
+
+<table class="table">
 <thead>
    <tr>
    <?php foreach ($fields as $field): ?>
       <th><?=$field?></th>
    <?php endforeach; ?>
+   <th><!-- Modifier --></th>
+   <th><!-- Supprimer --></th>
    </tr>
 </thead>
 
@@ -21,6 +25,8 @@
       <?php foreach ($fields as $field): ?>
       <td><?=$row->$field?></td>
       <?php endforeach; ?>
+      <td class="modifyDelete modify">Modifier</td>
+      <td class="modifyDelete delete">Supprimer</td>
       </tr>
    <?php endforeach; ?>
 </tbody>
@@ -38,7 +44,50 @@
    }
 
    tr:hover > td {
-      background-color: bisque !important;
+      background-color: bisque;
       transition: .1s;
+   }
+
+   .table {
+      margin-top: 30px;
+      border-collapse: collapse;
+   }
+
+   .modifyDelete {
+      font-weight: 1000;
+      user-select: none;
+   }
+
+   .modifyDelete:hover {
+      cursor: pointer;
+   }
+
+   .modify {
+      color: orange;
+   }
+
+   .delete {
+      color: red;
+   }
+
+   .modify:hover {
+      background-color: orange;
+      color: white;
+   }
+
+   .delete:hover {
+      background-color: red;
+      color: white;
+   }
+
+   /*!!!!!!*/
+   .btn-add {
+      border-style: solid !important;
+      border-width: 2px;
+      border-color: green;
+   }
+   .btn-add:hover {
+      background-color: green !important;
+      color: white !important;
    }
 </style>
