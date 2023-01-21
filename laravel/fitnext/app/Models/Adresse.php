@@ -32,7 +32,7 @@ class Adresse extends Model
     /**
      * @var array
      */
-    protected $fillable = ['ville', 'codepostale', 'rue', 'numeroderue'];
+    public $fillable = ['ville', 'codepostale', 'rue', 'numeroderue'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

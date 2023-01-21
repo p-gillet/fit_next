@@ -9,9 +9,11 @@ class AdresseController extends Controller
     public function show($id){
     }
 
-    public function index(){
-        return view('adresse.index', [
-            'adresses' => Adresse::all()
+    public function index() {
+        return view('tables.index', [
+            'tableName' => 'adresse',
+            'data' => Adresse::all(),
+            'fields' => get_class_vars('App\Models\Adresse')['fillable'],
         ]);
     }
 
