@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\ViewController;
+
 class HomeController extends Controller
 {
    // List all models of DB
@@ -21,6 +23,9 @@ class HomeController extends Controller
    }
 
    public function index() {
-      return view('home.index', ['models' => $this->getDBModels()]);
+      return view('home.index', [
+         'models' => $this->getDBModels(),
+         'views' => ViewController::getAllViews()
+      ]);
   }
 }

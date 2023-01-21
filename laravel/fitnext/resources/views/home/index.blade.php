@@ -16,9 +16,9 @@
    <div class="header">
       <h1>Afficher une vue</h1>
       <div class="tables">
-         <p>a</p>
-         <p>b</p>
-         <p>c</p>
+         <?php foreach ($views as $view): ?>
+            <a class="tableLink" href="/view/<?= $view?>"><?= $view ?></a>
+         <?php endforeach; ?>
       </div>
    </div>
 </div>

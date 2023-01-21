@@ -4,7 +4,9 @@
 
 @section('content')
 
-<h1>Table <?= $tableName?></h1>
+<a href="/">Retour à la page d'accueil</a>
+
+<h1>Table "<?= $tableName?>"</h1>
 
 <a class="btn btn-add" href="/<?=$tableName?>/create">Crée une entrée</a>
 

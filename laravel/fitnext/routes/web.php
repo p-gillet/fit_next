@@ -45,6 +45,8 @@ $router->delete('/{tableName}/delete', [
     'as' => 'profile', 'uses' => 'TableController@delete'
 ]);
 
-$router->get('adresse/{id}', [
-    'as' => 'profile', 'uses' => 'AdresseController@show'
+/* ------------- SQL views routing ------------- */
+
+$router->get('/view/{viewName}', [
+    'as' => 'profile', 'uses' => 'ViewController@index'
 ]);
