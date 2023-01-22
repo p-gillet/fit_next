@@ -1,7 +1,8 @@
 # Fitnext - Projet BDR
 Auteurs : Miguel Jalube, Paul Gillet, Leandro Saraiva Maia
 
-Site web simple permettant de gérer une base de donnée pour une salle de fitness.
+Site web simple permettant de gérer une base de donnée pour une salle de fitness.  
+Le framework utilisé est Laravel Lumen.
 
 # Rapport
 Le rapport au format pdf est disponible dans le dossier `/rapport/rapport.pdf`.  
