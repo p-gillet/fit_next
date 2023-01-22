@@ -69,6 +69,14 @@ $router->get('/features/organizeCourse/create', [
     'as' => 'profile', 'uses' => 'OrganizeCourseController@create'
 ]);
 
+$router->get('/features/organizeCourse/edit/{numcours}', [
+    'as' => 'profile', 'uses' => 'OrganizeCourseController@edit'
+]);
+
+$router->post('/features/organizeCourse/update/{numcours}', [
+    'as' => 'profile', 'uses' => 'OrganizeCourseController@update'
+]);
+
 $router->post('/features/organizeCourse', [
     'as' => 'profile', 'uses' => 'OrganizeCourseController@store'
 ]);

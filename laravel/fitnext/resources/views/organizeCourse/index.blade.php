@@ -16,7 +16,6 @@
     <th>Type de cours</th>
     <th>Heure</th>
     <th>Date</th>
-    <th>Coachs</th>
     <th>Local</th>
     <th><!-- Modifier --></th>
     <th><!-- Supprimer --></th>
@@ -29,9 +28,8 @@
          <td>{{ $row->typecours }}</td>
             <td>{{ $row->heurecours }}</td>
             <td>{{ $row->datecours }}</td>
-            <td>{{ $row->coach }}</td>
             <td>{{ $row->numlocal }}</td>
-      <td class="modifyDelete modify" onClick="onEdit('<?=$row->getKeyName()?>')">Modifier</td>
+      <td class="modifyDelete modify" onClick="onEdit('<?=$row->getKey()?>')">Modifier</td>
       <td class="modifyDelete delete" onClick="onDelete('<?=$row->getKeyName()?>', '<?=$row->getKey()?>')">Supprimer</td>
       </tr>
       @endforeach
@@ -39,8 +37,8 @@
 </table>
 
 <script>
-   const onEdit = ($keyName) => {
-      window.location.href='/features/organizeCourse/edit';
+   const onEdit = ($key) => {
+      window.location.href='/features/organizeCourse/edit/' + $key + '';
    }
 
    const onDelete = async (keyName, keyValue) => {
