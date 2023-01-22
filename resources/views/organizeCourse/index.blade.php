@@ -8,7 +8,7 @@
 
 <h1>Cours organisés</h1>
 
-<a class="btn btn-add" href="/features/organizeCourse/create">Créer une entrée</a>
+<a class="btn btn-add" href="/features/organizeCourse/create">Créer un cours</a>
 
 <table class="table">
 <thead>
@@ -30,7 +30,7 @@
             <td>{{ $row->datecours }}</td>
             <td>{{ $row->numlocal }}</td>
       <td class="modifyDelete modify" onClick="onEdit('<?=$row->getKey()?>')">Modifier</td>
-      <td class="modifyDelete delete"><a href="/features/organizeCourse/delete/{{ $row->numcours }}">Supprimer</a></td>
+      <td class="modifyDelete delete" onClick="onDelete('/features/organizeCourse/delete/{{ $row->numcours }}')">Supprimer</td>
       </tr>
       @endforeach
 </tbody>
@@ -39,6 +39,10 @@
 <script>
    const onEdit = ($key) => {
       window.location.href='/features/organizeCourse/edit/' + $key + '';
+   }
+
+   const onDelete = (url) => {
+      window.location.href = url;
    }
 </script>
 

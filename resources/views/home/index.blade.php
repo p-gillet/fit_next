@@ -7,9 +7,8 @@
    <div class="header">
       <h1>Fonctionalités</h1>
       <div class="tables">
-         <a class="tableLink" href="/features/addNewClient">Ajouter un client</a>
-         <a class="tableLink" href="/features/organizeCourse">Organiser un cours collectif</a>
-         <a class="tableLink" href="/features/subscribeClient">Abonnement d'un client</a>
+         <a class="tableLink" href="/features/addNewClient">Ajouter une personne (abonné/coach/employé)</a>
+         <a class="tableLink" href="/features/organizeCourse">Organisation des cours collectifs</a>
       </div>
    </div>
 

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<a href="/" class="goBack">Retour à la page d'accueil</a>
+<a href="/features/organizeCourse" class="goBack">Retour aux cours</a>
 
 <h1>Organisation d'un cours</h1>
 
@@ -40,7 +40,7 @@
         </select>
     </div>
 
-    <button type="submit">Créer</button>
+    <button class="btn btn-submit" type="submit">Créer</button>
 </form>
 
 

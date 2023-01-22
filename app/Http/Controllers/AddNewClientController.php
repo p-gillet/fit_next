@@ -11,8 +11,6 @@ use Illuminate\Http\Request;
 
 class AddNewClientController extends Controller
 {
-   // TODO Miguel
-   /* */
    public function index() {
 
       return view('addNewClient.index', [

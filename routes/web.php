@@ -85,10 +85,6 @@ $router->post('/features/organizeCourse', [
     'as' => 'profile', 'uses' => 'OrganizeCourseController@store'
 ]);
 
-$router->get('/features/subscribeClient', [
-    'as' => 'profile', 'uses' => 'SubscribeClientController@index'
-]);
-
 $router->get('/features/organizeCours/abonne/{numcours}', [
     'as' => 'profile', 'uses' => 'OrganizeCourseController@abonneList'
 ]);

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<a href="/" class="goBack">Retour à la page d'accueil</a>
+<a href="/features/organizeCourse" class="goBack">Retour aux cours</a>
 
 <h1>Organisation d'un cours</h1>
 
@@ -51,7 +51,7 @@
         </select>
     </div>
 
-    <button type="submit">Modifier</button>
+    <button class="btn btn-submit" type="submit">Modifier</button>
 </form>
 
 
@@ -118,13 +118,13 @@
    font-size: 25px;
    width: 100%;
    margin-bottom: 50px;
-   border-color: green !important;
+   border-color: orange !important;
    border-style: solid !important;
    cursor: pointer;
 }
 
 .btn-submit:hover {
    color: white !important;
-   background-color: green !important;
+   background-color: orange !important;
 }
 </style>

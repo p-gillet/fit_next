@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 
 class OrganizeCourseController extends Controller
 {
-   // TODO Miguel
    public function index() {
       return view('organizeCourse.index', [
          'cours' => CoursCollectif::all()->each(function($cours) {
@@ -36,22 +35,26 @@ class OrganizeCourseController extends Controller
    }
 
    public function update(Request $request, $numcours) {
+      
       $coursCollectif = CoursCollectif::find($numcours);
       $coursCollectif->typecours = $request->input('typecours');
       $coursCollectif->heurecours = $request->input('heurecours');
       $coursCollectif->datecours = $request->input('datecours');
       $coursCollectif->numlocal = $request->input('local');
       $coursCollectif->save();
-
+      
       // detach all coaches from course
       $coursCollectif->coaches()->detach();
       // attach coaches to course
       $coursCollectif->coaches()->attach($request->input('coach'), ['numcours' => $numcours]);
-
+      
       // detach all abonnes from course
       $coursCollectif->abonnes()->detach();
       // attach abonnes to course
       $coursCollectif->abonnes()->attach($request->input('abonne'), ['numcours' => $numcours]);
+
+      $this->addNotif('success', 'Cours modifié avec succès!');
+
       // same page but with success message
       return $this->index()->with('success', 'Cours modifié avec succès!');
    }
@@ -69,6 +72,9 @@ class OrganizeCourseController extends Controller
       $coursCollectif->coaches()->detach();
       $coursCollectif->abonnes()->detach();
       $coursCollectif->delete();
+
+      $this->addNotif('success', 'Cours supprimé avec succès!');
+
       return $this->index()->with('success', 'Cours supprimé avec succès!');
    }
 
@@ -90,6 +96,9 @@ class OrganizeCourseController extends Controller
 
       // attach coaches to course
       $coursCollectif->coaches()->attach($request->input('coach'), ['numcours' => $numcours]);
+
+      $this->addNotif('success', 'Cours organisé avec succès!');
+
       // same page but with success message
       return $this->index()->with('success', 'Cours organisé avec succès!');
    }
@@ -116,6 +125,9 @@ class OrganizeCourseController extends Controller
       // get array only of keys
       $key = array_keys($request->input());
       $abonne_coursCollectif->whereIn('numabonne', $key)->update(['estvenu' => true]);
+
+      $this->addNotif('success', 'Abonné modifié avec succès!');
+
       return $this->abonneList($numcours)->with('success', 'Abonné modifié avec succès!');
    }
 }
