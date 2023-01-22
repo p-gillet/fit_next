@@ -135,6 +135,7 @@ class TableController extends Controller
       try {
          DB::statement("DELETE FROM ".$tableName." WHERE ".$reqJson->keyName." = ".$reqJson->keyValue.";");
       } catch (\Throwable $e) {
+         $this->addNotif('danger', $e->getMessage());
          return $e->getMessage();
       }
 

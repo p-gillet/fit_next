@@ -52,7 +52,7 @@
       });
 
       // Refresh page
-      //window.location.href='/<?=$tableName?>';
+      window.location.href='/<?=$tableName?>';
    }
 </script>
 

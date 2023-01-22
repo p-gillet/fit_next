@@ -10,6 +10,23 @@
    <body>
       @yield('content')
 
+      <?php
+      session_start();
+      ?>
+
+      <!-- Notifications -->
+      <?php if (array_key_exists('notif', $_SESSION) && $_SESSION['notif'] != null) :?>
+         <div id="notif" style="background-color: 
+         <?php switch($_SESSION['notif']['type']) {
+            case 'danger': echo '#c72323'; break;
+            case 'warning': echo '#e68217'; break;
+            case 'success': echo 'green'; break;
+         } ?>
+         ">
+            <div><?=$_SESSION['notif']["text"]?></div>
+         </div>
+      <?php endif; ?>
+
       <!-- Header bar -->
       <div id="main-header">
          <a href="/">Fitnext</a>
@@ -19,6 +36,10 @@
      <?php
        $headerHeightPx = 60;
        $pageWidth = "80%";
+       $notifheightPx = (array_key_exists('notif', $_SESSION) && $_SESSION['notif'] != null) ? 60 : 0;
+
+       // Clear notif
+       $_SESSION['notif'] = null;
      ?>
      <style>
       * {
@@ -28,10 +49,28 @@
       }
 
       body {
-         margin-top: <?=$headerHeightPx + 10?>px;
+         margin-top: <?=$headerHeightPx + $notifheightPx + 20?>px;
          width: <?=$pageWidth?>;
          margin-left: auto;
          margin-right: auto;
+      }
+
+      #notif {
+         background-color: red;
+         height: <?=$notifheightPx?>px;
+         position: absolute;
+         top: <?=$headerHeightPx?>px;
+         width: 100%;
+         left: 0;
+         padding-top: 5px;
+         padding-bottom: 5px;
+      }
+
+      #notif div {
+         color: white;
+         width: 80%;
+         background-color: transparent;
+         margin-left: 10%;
       }
 
       #main-header {
