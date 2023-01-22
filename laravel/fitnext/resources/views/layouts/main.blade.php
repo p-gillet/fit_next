@@ -76,6 +76,17 @@
          background-color: coral;
          transition: .2s;
       }
+
+      .goBack {
+         transition: .5s;
+         user-select: none;
+      }
+
+      .goBack:hover {
+         color: coral;
+         letter-spacing: 1px;
+         transition: .2s;
+      }
    </style>
    </body>
 </html>

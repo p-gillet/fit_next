@@ -50,3 +50,17 @@ $router->delete('/{tableName}/delete', [
 $router->get('/view/{viewName}', [
     'as' => 'profile', 'uses' => 'ViewController@index'
 ]);
+
+/* ------------- Features routing ------------- */
+
+$router->get('/features/addNewClient', [
+    'as' => 'profile', 'uses' => 'AddNewClientController@index'
+]);
+
+$router->get('/features/organizeCourse', [
+    'as' => 'profile', 'uses' => 'OrganizeCourseController@index'
+]);
+
+$router->get('/features/subscribeClient', [
+    'as' => 'profile', 'uses' => 'SubscribeClientController@index'
+]);

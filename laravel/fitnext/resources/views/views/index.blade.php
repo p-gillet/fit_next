@@ -4,7 +4,7 @@
 
 @section('content')
 
-<a href="/">Retour à la page d'accueil</a>
+<a href="/" class="goBack">Retour à la page d'accueil</a>
 
 <h1>Vue "<?= $viewName?>"</h1>
 

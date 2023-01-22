@@ -1,9 +1,18 @@
 @extends('layouts.main')
 
-@section('title', 'table')
+@section('title', 'Accueil')
 
 @section('content')
 <div class="container">
+   <div class="header">
+      <h1>Fonctionalités</h1>
+      <div class="tables">
+         <a class="tableLink" href="/features/addNewClient">Ajouter un client</a>
+         <a class="tableLink" href="/features/organizeCourse">Organiser un cours collectif</a>
+         <a class="tableLink" href="/features/subscribeClient">Abonnement d'un client</a>
+      </div>
+   </div>
+
    <div class="header">
       <h1>Afficher une table</h1>
       <div class="tables">
@@ -41,7 +50,7 @@
       text-decoration: none;
       transition: 0.2s;
       padding: 5px;
-      margin: 5px 50px 5px 50px;
+      margin: 5px;
       border-radius: 5px;
       background-color: white;
    }

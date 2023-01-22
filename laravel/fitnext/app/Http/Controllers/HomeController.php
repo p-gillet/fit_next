@@ -27,5 +27,5 @@ class HomeController extends Controller
          'models' => $this->getDBModels(),
          'views' => ViewController::getAllViews()
       ]);
-  }
+   }
 }

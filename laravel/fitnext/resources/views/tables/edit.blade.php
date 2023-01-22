@@ -4,7 +4,7 @@
 
 @section('content')
 
-<a href="/<?=$tableName?>">Retour à la table "<?= $tableName?>"</a>
+<a href="/<?=$tableName?>" class="goBack">Retour à la table "<?= $tableName?>"</a>
 
 <h1>Modification d'une entrée dans la table <?= $tableName?></h1>
 

@@ -37,7 +37,69 @@ class TableController extends Controller
    }
 
    public function store($tableName) {
-      //TODO
+      switch($tableName) {
+         case 'typeMateriel': 
+            $typeMateriel = new TypeMateriel();
+            $typeMateriel->nom = request('nom');
+            $typeMateriel->save();
+            break;
+         case 'programmeIndividuel':
+            $programmeIndividuel = new ProgrammeIndividuel();
+            $programmeIndividuel->nom = request('nom');
+            $programmeIndividuel->save();
+            break;
+         case 'personne':
+            $materielfitness = new Personne();
+            $personne->nom = request('nom');
+            $personne->prenom = request('prenom');
+            $personne->datenaissance = request('datenaissance');
+            $personne->save();
+            break;
+         case 'materielFitness':
+            $materielfitness = new MaterielFitness();
+            $materielfitness->nom = request('nom');
+            $materielfitness->marque = request('marque');
+            $materielfitness->modele = request('modele');
+            $materielfitness->save();
+            break;
+         case 'local':
+            $local = new Local();
+            $local->nom = request('nom');
+            $local->save();
+            break;
+         case 'exercice':
+            $exercice = new Exercice();
+            $exercice->nom = request('nom');
+            $exercice->save();
+            break;
+         case 'employe':
+            $employe = new Employe();
+            $employe->nom = request('nom');
+            $employe->prenom = request('prenom');
+            $employe->datenaissance = request('datenaissance');
+            $employe->save();
+            break;
+         case 'coach':
+            $coach = new Coach();
+            $coach->nom = request('nom');
+            $coach->save();
+            break;
+         case 'abonne':
+            $coach = new Abonne();
+            $coach->dateinscription = request('dateinscription');
+            $coach->datefincontrat = request('datefincontrat');
+            $coach->save();
+            break;
+         case 'addresse':
+            $adresse = new Adresse();
+            $adresse->ville = request('ville');
+            $adresse->codepostale = request('codepostale');
+            $adresse->rue = request('rue');
+            $adresse->numeroderue = request('numeroderue');
+            $adresse->save();
+            break;
+         default: return 'Table '.$tableName.' inconnue !';
+      }
 
       return $this->index($tableName);
    }

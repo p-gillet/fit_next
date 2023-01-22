@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
-@section('title', $tableName)
+@section('title', 'Table '.$tableName)
 
 @section('content')
 
-<a href="/">Retour à la page d'accueil</a>
+<a href="/" class="goBack">Retour à la page d'accueil</a>
 
 <h1>Table "<?= $tableName?>"</h1>
 
