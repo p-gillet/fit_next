@@ -13,10 +13,15 @@ class Coach_coursCollectif extends Model
      * 
      * @var string
      */
-    protected $table = 'coach_coursCollectif';
+    protected $table = 'coach_courscollectif';
 
     /**
      * @var array
      */
     protected $fillable = [];
+
+    /** primary key
+     * 
+     */
+    protected $primaryKey = ['numcours', 'numcoach'];
 }

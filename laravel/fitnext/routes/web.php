@@ -61,8 +61,16 @@ $router->post('/features/addNewClient', [
     'as' => 'profile', 'uses' => 'AddNewClientController@store'
 ]);
 
-$router->get('/features/organizeCourse', [
+$router->get('/features/organizeCourse/', [
     'as' => 'profile', 'uses' => 'OrganizeCourseController@index'
+]);
+
+$router->get('/features/organizeCourse/create', [
+    'as' => 'profile', 'uses' => 'OrganizeCourseController@create'
+]);
+
+$router->post('/features/organizeCourse', [
+    'as' => 'profile', 'uses' => 'OrganizeCourseController@store'
 ]);
 
 $router->get('/features/subscribeClient', [
