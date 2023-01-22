@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CoursCollectif extends Model
 {
+    public $timestamps = false;
+
     /**
      * The table associated with the model.
      * 

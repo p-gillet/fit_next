@@ -17,4 +17,6 @@ class Abonne_coursCollectif extends Model
      * @var array
      */
     protected $fillable = [];
+
+    public $timestamps = false;
 }

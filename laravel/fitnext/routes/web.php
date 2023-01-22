@@ -57,6 +57,10 @@ $router->get('/features/addNewClient', [
     'as' => 'profile', 'uses' => 'AddNewClientController@index'
 ]);
 
+$router->post('/features/addNewClient', [
+    'as' => 'profile', 'uses' => 'AddNewClientController@store'
+]);
+
 $router->get('/features/organizeCourse', [
     'as' => 'profile', 'uses' => 'OrganizeCourseController@index'
 ]);

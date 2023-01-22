@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class MaterielFitness extends Model
 {
+
+    public $timestamps = false;
     /**
      * The table associated with the model.
      * 
