@@ -8,7 +8,7 @@
 
 <h1>Table "<?= $tableName?>"</h1>
 
-<a class="btn btn-add" href="/<?=$tableName?>/create">Crée une entrée</a>
+<a class="btn btn-add" href="/<?=$tableName?>/create/<?=$keyName?>">Crée une entrée</a>
 
 <div><?= sizeof($data) > 0 ? '' : 'Cette table est vide !'?></div>
 

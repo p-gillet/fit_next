@@ -8,12 +8,14 @@
 
 <h1>Création d'une entrée dans la table <?= $tableName?></h1>
 
-<form action="/<?=$tableName?>/store" method="POST">
+<form action="/<?=$tableName?>/store/<?=$keyName?>" method="POST">
    <?php foreach ($fields as $field): ?>
-      <div class="form-elem">
-         <label for="<?=$field?>"><?=$field?> : </label>
-         <input name="<?=$field?>" placeholder="<?=$field?>"/>
-      </div>
+      <?php /*Dont add an input for the key*/ if ($field != $keyName) :?>
+         <div class="form-elem">
+            <label for="<?=$field?>"><?=$field?> : </label>
+            <input name="<?=$field?>" placeholder="<?=$field?>"/>
+         </div>
+      <?php endif;?>
    <?php endforeach; ?>
    <input class="btn btn-submit" type="submit" value="Créer une entrée"/>
 </form>
