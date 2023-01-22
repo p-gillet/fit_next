@@ -128,6 +128,32 @@
          letter-spacing: 1px;
          transition: .2s;
       }
+      
+      .form-elem > select {
+         background-color: white;
+         font-size: 22px;
+         width: 100%;
+         border-style: solid;
+         border-color: black;
+         border-width: 2px;
+         height: 50px;
+         padding: 5px;
+         margin-bottom: 20px;
+      }
+
+      .form-elem > select[multiple] {
+         height: 200px;
+      }
+
+      .form-elem > select > option {
+         background-color: white;
+      }
+
+      .form-elem > input[type="checkbox"] {
+         height: 20px;
+         width: 20px;
+         display: inline;
+      }
 
       .form-elem input {
          background-color: white;

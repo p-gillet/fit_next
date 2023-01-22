@@ -79,7 +79,7 @@
         <input type="text" name="certification" id="certification">
     </div>
 
-    <button type="submit">Créer</button>
+    <button class="btn btn-submit" type="submit">Créer</button>
 </form>
 
 
