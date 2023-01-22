@@ -98,6 +98,8 @@ class OrganizeCourseController extends Controller
       $coursCollectif = CoursCollectif::find($numcours);
       // get abonnes assigned to course with attribute estvenu to true if present
       $abonnes = $coursCollectif->abonnes()->get()->each(function($abonne) use ($numcours) {
+         $abonne->nom = Personne::find($abonne->numavs)->nom;
+         $abonne->prenom = Personne::find($abonne->numavs)->prenom;
          $abonne->estvenu = Abonne_coursCollectif::where('numcours', $numcours)->where('numabonne', $abonne->numavs)->first()->estvenu;
       });
       return view('organizeCourse.abonneList', [
