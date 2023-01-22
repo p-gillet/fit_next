@@ -10,6 +10,7 @@
 
 <a class="btn btn-add" href="/features/organizeCourse/create">Créer une entrée</a>
 
+<form action="/features/organizeCourse/estvenu/{{ $cours->numcours }}" method="POST">
 <table class="table">
 <thead>
     <tr>
@@ -21,18 +22,18 @@
 </thead>
 
 <tbody>
-@foreach($cours as $row)
+@foreach($abonnes as $row)
       <tr>
-         <td>{{ $row->typecours }}</td>
-            <td>{{ $row->heurecours }}</td>
-            <td>{{ $row->datecours }}</td>
-            <td>{{ $row->numlocal }}</td>
-      <td class="modifyDelete modify" onClick="onEdit('<?=$row->getKey()?>')">Modifier</td>
-      <td class="modifyDelete delete"><a href="/features/organizeCourse/delete/{{ $row->numcours }}">Supprimer</a></td>
+         <td>{{ $row->numavs }}</td>
+            <td>{{ $row->nom }}</td>
+            <td>{{ $row->prenom }}</td>
+            <td><label for="{{ $row->numavs }}"><input id="{{ $row->numavs }}" type="checkbox" @if($row->estvenu){ checked="checked" } @endif name="{{ $row->numavs }}"></td>
       </tr>
-      @endforeach
+@endforeach
 </tbody>
 </table>
+<button type="submit">Enregistrer</button>
+</form>
 
 <script>
    const onEdit = ($key) => {

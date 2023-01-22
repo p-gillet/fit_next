@@ -91,7 +91,7 @@ CREATE TABLE typeMateriel_exercice (
 CREATE TABLE abonne_coursCollectif (
     numAbonne bigint NOT NULL,
     numCours bigint NOT NULL,
-    estVenu boolean NOT NULL
+    estVenu boolean
 );
 
 CREATE TABLE exercice_programmeIndividuel (

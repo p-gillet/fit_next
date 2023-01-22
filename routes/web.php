@@ -92,3 +92,7 @@ $router->get('/features/subscribeClient', [
 $router->get('/features/organizeCours/abonne/{numcours}', [
     'as' => 'profile', 'uses' => 'OrganizeCourseController@abonneList'
 ]);
+
+$router->post('/features/organizeCourse/estvenu/{numcours}', [
+    'as' => 'profile', 'uses' => 'OrganizeCourseController@abonneEstVenu'
+]);

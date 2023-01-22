@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Coach;
 use App\Models\CoursCollectif;
 use App\Models\Coach_coursCollectif;
+use App\Models\Abonne_coursCollectif;
 use App\Models\Personne;
 use App\Models\Local;
 use App\Models\Adresse;
@@ -95,9 +96,24 @@ class OrganizeCourseController extends Controller
 
    public function abonneList($numcours){
       $coursCollectif = CoursCollectif::find($numcours);
+      // get abonnes assigned to course with attribute estvenu to true if present
+      $abonnes = $coursCollectif->abonnes()->get()->each(function($abonne) use ($numcours) {
+         $abonne->estvenu = Abonne_coursCollectif::where('numcours', $numcours)->where('numabonne', $abonne->numavs)->first()->estvenu;
+      });
       return view('organizeCourse.abonneList', [
          'cours' => $coursCollectif,
-         'abonnes' => $coursCollectif->abonnes()->get()
+         'abonnes' => $abonnes
       ]);
+   }
+
+   public function abonneEstVenu(Request $request, $numcours){
+      $coursCollectif = CoursCollectif::find($numcours);
+      $abonne_coursCollectif = Abonne_coursCollectif::where('numcours', $numcours);
+      // set every abonne to not present
+      $abonne_coursCollectif->update(['estvenu' => 0]);
+      // get array only of keys
+      $key = array_keys($request->input());
+      $abonne_coursCollectif->whereIn('numabonne', $key)->update(['estvenu' => true]);
+      return $this->abonneList($numcours)->with('success', 'Abonné modifié avec succès!');
    }
 }
