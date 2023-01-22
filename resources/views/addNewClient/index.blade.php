@@ -24,7 +24,7 @@
         <input type="text" name="sexe" id="sexe" maxlength="1">
     </div>
     <div class="form-elem">
-        <label for="numTelephone">Numéto téléphone</label>
+        <label for="numTelephone">Numéro téléphone</label>
         <input type="text" name="numtelephone" id="numtelephone">
     </div>
     <div class="form-elem">

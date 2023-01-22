@@ -4,11 +4,9 @@
 
 @section('content')
 
-<a href="/" class="goBack">Retour à la page d'accueil</a>
+<a href="/features/organizeCourse/edit/<?=$cours->numcours?>" class="goBack">Retour à l'édition du cours</a>
 
-<h1>Cours organisés</h1>
-
-<a class="btn btn-add" href="/features/organizeCourse/create">Créer une entrée</a>
+<h1>Liste des abonnés</h1>
 
 <form action="/features/organizeCourse/estvenu/{{ $cours->numcours }}" method="POST">
 <table class="table">
@@ -32,7 +30,7 @@
 @endforeach
 </tbody>
 </table>
-<button type="submit">Enregistrer</button>
+<button class="btn btn-submit" type="submit">Enregistrer</button>
 </form>
 
 <script>
@@ -92,6 +90,11 @@
    .delete:hover {
       background-color: red;
       color: white;
+   }
+
+   .btn-submit {
+      cursor: pointer;
+      margin: 10px;
    }
 
    /*!!!!!!*/

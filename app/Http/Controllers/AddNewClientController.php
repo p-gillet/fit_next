@@ -59,6 +59,8 @@ class AddNewClientController extends Controller
          $coach->save();
       }
 
-      return new Response('Client ajouté avec succès');
+      $this->addNotif('success', 'Personne ajoutée avec succès');
+
+      return redirect('/');
    }
 }

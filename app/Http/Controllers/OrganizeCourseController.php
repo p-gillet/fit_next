@@ -56,7 +56,7 @@ class OrganizeCourseController extends Controller
       $this->addNotif('success', 'Cours modifié avec succès!');
 
       // same page but with success message
-      return $this->index()->with('success', 'Cours modifié avec succès!');
+      return redirect('/features/organizeCourse');
    }
 
    public function create() {
@@ -75,7 +75,7 @@ class OrganizeCourseController extends Controller
 
       $this->addNotif('success', 'Cours supprimé avec succès!');
 
-      return $this->index()->with('success', 'Cours supprimé avec succès!');
+      return redirect('/features/organizeCourse');
    }
 
    /**
@@ -100,7 +100,7 @@ class OrganizeCourseController extends Controller
       $this->addNotif('success', 'Cours organisé avec succès!');
 
       // same page but with success message
-      return $this->index()->with('success', 'Cours organisé avec succès!');
+      return redirect('/features/organizeCourse');
    }
 
    public function abonneList($numcours){
@@ -127,7 +127,7 @@ class OrganizeCourseController extends Controller
       $abonne_coursCollectif->whereIn('numabonne', $key)->update(['estvenu' => true]);
 
       $this->addNotif('success', 'Abonné modifié avec succès!');
-
-      return $this->abonneList($numcours)->with('success', 'Abonné modifié avec succès!');
+      
+      return redirect("/features/organizeCours/abonne/".$numcours);
    }
 }
