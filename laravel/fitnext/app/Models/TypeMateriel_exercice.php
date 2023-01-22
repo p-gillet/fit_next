@@ -12,7 +12,7 @@ class TypeMateriel_exercice extends Model
      * 
      * @var string
      */
-    protected $table = 'typeMateriel_exercice';
+    protected $table = 'typemateriel_exercice';
 
     /**
      * @var array

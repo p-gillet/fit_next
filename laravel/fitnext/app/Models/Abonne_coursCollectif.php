@@ -11,7 +11,7 @@ class Abonne_coursCollectif extends Model
      * 
      * @var string
      */
-    protected $table = 'abonne_coursCollectif';
+    protected $table = 'abonne_courscollectif';
 
     /**
      * @var array

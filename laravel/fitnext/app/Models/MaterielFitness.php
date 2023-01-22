@@ -13,7 +13,7 @@ class MaterielFitness extends Model
      * 
      * @var string
      */
-    protected $table = 'materielFitness';
+    protected $table = 'materielfitness';
 
     /**
      * @var array

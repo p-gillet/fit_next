@@ -8,29 +8,35 @@
 
 <h1>Table "<?= $tableName?>"</h1>
 
+<?php if ($keyName != null) :?>
 <a class="btn btn-add" href="/<?=$tableName?>/create/<?=$keyName?>">Crée une entrée</a>
+<?php endif;?>
 
 <div><?= sizeof($data) > 0 ? '' : 'Cette table est vide !'?></div>
 
 <table class="table">
 <thead>
    <tr>
-   <?php foreach ($fields as $field): ?>
-      <th><?=$field?></th>
-   <?php endforeach; ?>
-   <th><!-- Modifier --></th>
-   <th><!-- Supprimer --></th>
+      <?php foreach ($fields as $field): ?>
+         <th><?=$field?></th>
+      <?php endforeach; ?>
+      <?php if ($keyName != null) :?>
+         <th><!-- Modifier --></th>
+         <th><!-- Supprimer --></th>
+      <?php endif;?>
    </tr>
 </thead>
 
 <tbody>
    <?php foreach ($data as $row): ?>
       <tr>
-      <?php foreach ($fields as $field): ?>
-         <td><?=$row[$field]?></td>
-      <?php endforeach; ?>
-      <td class="modifyDelete modify" onClick="onEdit('<?=$row[$keyName]?>')">Modifier</td>
-      <td class="modifyDelete delete" onClick="onDelete('<?=$row[$keyName]?>')">Supprimer</td>
+         <?php foreach ($fields as $field): ?>
+            <td><?=$row[$field] == null ? 'NULL' : $row[$field]?></td>
+         <?php endforeach; ?>
+         <?php if ($keyName != null) :?>
+            <td class="modifyDelete modify" onClick="onEdit('<?=$row[$keyName]?>')">Modifier</td>
+            <td class="modifyDelete delete" onClick="onDelete('<?=$row[$keyName]?>')">Supprimer</td>
+         <?php endif;?>
       </tr>
    <?php endforeach; ?>
 </tbody>

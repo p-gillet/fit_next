@@ -22,22 +22,33 @@ class TableController extends Controller
    public function index($tableName) {
       $modelClass = $this->getModelClassFromName($tableName);
       $data = $modelClass::all();
-      $dataArray = $data->toArray();
+      $dataArray = [];
       $keyName = null;
+
+      foreach($data as $row) {
+         array_push($dataArray, $row->getAttributes());
+      }
 
       if (sizeof($dataArray) > 0) {
          $keyName = $data[0]->getKeyName();
-
-         // Sort array based on key
-         usort($dataArray, function ($a, $b) use ($keyName) {
-            return strnatcmp($a[$keyName], $b[$keyName]);
-         });
+         
+         // When keyName equals id, it means there is no primary key to this table
+         // When keyName is an array, it means there is multiple keys
+         // We do not handle those 2 states
+         if ($keyName != 'id' && !is_array($keyName)) {
+            // Sort array based on key
+            usort($dataArray, function ($a, $b) use ($keyName) {
+               return strnatcmp($a[$keyName], $b[$keyName]);
+            });
+         } else {
+            $keyName = null;
+         }
       }
 
       return view('tables.index', [
          'tableName' => $tableName,
          'data' => $dataArray,
-         'keyName' => $keyName,
+         'keyName' => $keyName, // If null, this table has no primary key
          'fields' => Schema::getColumnListing($tableName)
       ]);
    }

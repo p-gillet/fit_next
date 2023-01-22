@@ -12,7 +12,7 @@ class TypeMateriel extends Model
      * 
      * @var string
      */
-    protected $table = 'typeMateriel';
+    protected $table = 'typemateriel';
 
     /**
      * @var array

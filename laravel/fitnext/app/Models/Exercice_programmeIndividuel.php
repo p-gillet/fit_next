@@ -13,7 +13,7 @@ class Exercice_programmeIndividuel extends Model
      * 
      * @var string
      */
-    protected $table = 'exercice_programmeIndividuel';
+    protected $table = 'exercice_programmeindividuel';
 
     /**
      * @var array
