@@ -20,10 +20,10 @@ $router->get('/', [
 
 /* ------------- SQL tables routing ------------- */
 // Create
-$router->get('/{tableName}/create', [
+$router->get('/{tableName}/create/{keyName}', [
     'as' => 'profile', 'uses' => 'TableController@create'
 ]);
-$router->post('/{tableName}/store', [
+$router->post('/{tableName}/store/{keyName}', [
     'as' => 'profile', 'uses' => 'TableController@store'
 ]);
 
@@ -33,10 +33,10 @@ $router->get('/{tableName}', [
 ]);
 
 // Update
-$router->get('/{tableName}/edit', [
+$router->get('/{tableName}/edit/{keyName}/{keyValue}', [
     'as' => 'profile', 'uses' => 'TableController@edit'
 ]);
-$router->patch('/{tableName}/update', [
+$router->post('/{tableName}/update/{keyName}/{keyValue}', [
     'as' => 'profile', 'uses' => 'TableController@update'
 ]);
 

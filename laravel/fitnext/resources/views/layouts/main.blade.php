@@ -128,6 +128,15 @@
          letter-spacing: 1px;
          transition: .2s;
       }
+
+      .form-elem input {
+         background-color: white;
+      }
+
+      .form-elem input[disabled] {
+         background-color: lightgray;
+         cursor: no-drop;
+      }
    </style>
    </body>
 </html>

@@ -8,11 +8,11 @@
 
 <h1>Modification d'une entrée dans la table <?= $tableName?></h1>
 
-<form action="/<?=$tableName?>/update" method="PATCH">
+<form action="/<?=$tableName?>/update/<?=$keyName?>/<?=$keyValue?>" method="post">
    <?php foreach ($fields as $field): ?>
       <div class="form-elem">
          <label for="<?=$field?>"><?=$field?> : </label>
-         <input value="<?="TODO"?>" name="<?=$field?>" placeholder="<?=$field?>"/>
+         <input value="<?=$data->$field?>" name="<?=$field?>" placeholder="<?=$field?>" <?= ($keyName == $field ? 'disabled' : '') ?>/>
       </div>
    <?php endforeach; ?>
    <input class="btn btn-submit" type="submit" value="Modifier l'entrée"/>
