@@ -77,10 +77,18 @@ $router->post('/features/organizeCourse/update/{numcours}', [
     'as' => 'profile', 'uses' => 'OrganizeCourseController@update'
 ]);
 
+$router->get('/features/organizeCourse/delete/{numcours}', [
+    'as' => 'profile', 'uses' => 'OrganizeCourseController@delete'
+]);
+
 $router->post('/features/organizeCourse', [
     'as' => 'profile', 'uses' => 'OrganizeCourseController@store'
 ]);
 
 $router->get('/features/subscribeClient', [
     'as' => 'profile', 'uses' => 'SubscribeClientController@index'
+]);
+
+$router->get('/features/organizeCours/abonne/{numcours}', [
+    'as' => 'profile', 'uses' => 'OrganizeCourseController@abonneList'
 ]);

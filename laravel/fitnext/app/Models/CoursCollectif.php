@@ -15,6 +15,13 @@ class CoursCollectif extends Model
         return $this->belongsToMany('App\Models\Coach', 'coach_courscollectif', 'numcours', 'numcoach');
     }
 
+    /** 
+     * Get the abonnes for the course.
+     */
+    public function abonnes() {
+        return $this->belongsToMany('App\Models\Abonne', 'abonne_courscollectif', 'numcours', 'numabonne');
+    }
+
     /**
      * The table associated with the model.
      * 

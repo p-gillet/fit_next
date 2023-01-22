@@ -13,13 +13,11 @@
 <table class="table">
 <thead>
     <tr>
-    <th>Type de cours</th>
-    <th>Heure</th>
-    <th>Date</th>
-    <th>Local</th>
-    <th><!-- Modifier --></th>
-    <th><!-- Supprimer --></th>
-   </tr>
+        <th>Numéro AVS</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Est venu</th>
+    </tr>
 </thead>
 
 <tbody>

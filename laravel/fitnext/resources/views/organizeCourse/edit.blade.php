@@ -32,6 +32,17 @@
     </div>
 
     <div class="form-elem">
+        <label for="abonne">Abonnés</label>
+        <select name="abonne[]" id="abonne" multiple>
+            @foreach($abonnes as $abonne)
+                <option @if(in_array($abonne->numavs, $selectedAbonnes)){ selected } @endif value="{{ $abonne->numavs }}">{{ $abonne->nom }} {{ $abonne->prenom }}</option>
+            @endforeach
+        </select>
+        <a href="/personne/create">Créer un abonné</a>
+        <a href="/features/organizeCours/abonne/{{ $cours->numcours }}">Voir la liste des abonnés inscrits</a>
+    </div>
+
+    <div class="form-elem">
         <label for="local" >Local</label>
         <select name="local" id="local">
             @foreach($locals as $local)
