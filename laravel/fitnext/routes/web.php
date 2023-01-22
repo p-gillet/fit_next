@@ -33,10 +33,10 @@ $router->get('/{tableName}', [
 ]);
 
 // Update
-$router->get('/{tableName}/edit', [
+$router->get('/{tableName}/edit/{keyName}/{keyValue}', [
     'as' => 'profile', 'uses' => 'TableController@edit'
 ]);
-$router->patch('/{tableName}/update', [
+$router->post('/{tableName}/update/{keyName}/{keyValue}', [
     'as' => 'profile', 'uses' => 'TableController@update'
 ]);
 

@@ -10,6 +10,8 @@
 
 <a class="btn btn-add" href="/<?=$tableName?>/create">Crée une entrée</a>
 
+<div><?= sizeof($data) > 0 ? '' : 'Cette table est vide !'?></div>
+
 <table class="table">
 <thead>
    <tr>
@@ -25,28 +27,28 @@
    <?php foreach ($data as $row): ?>
       <tr>
       <?php foreach ($fields as $field): ?>
-         <td><?=$row->$field?></td>
+         <td><?=$row[$field]?></td>
       <?php endforeach; ?>
-      <td class="modifyDelete modify" onClick="onEdit('<?=$row->getKeyName()?>')">Modifier</td>
-      <td class="modifyDelete delete" onClick="onDelete('<?=$row->getKeyName()?>', '<?=$row->getKey()?>')">Supprimer</td>
+      <td class="modifyDelete modify" onClick="onEdit('<?=$row[$keyName]?>')">Modifier</td>
+      <td class="modifyDelete delete" onClick="onDelete('<?=$row[$keyName]?>')">Supprimer</td>
       </tr>
    <?php endforeach; ?>
 </tbody>
 </table>
 
 <script>
-   const onEdit = ($keyName) => {
-      window.location.href='/<?=$tableName?>/edit';
+   const onEdit = (keyValue) => {
+      window.location.href='/<?=$tableName?>/edit/<?=$keyName?>/' + keyValue;
    }
 
-   const onDelete = async (keyName, keyValue) => {
+   const onDelete = async (keyValue) => {
       await fetch('/<?=$tableName?>/delete', {
          method: 'delete',
          headers: {
             'Content-Type': "application/json"
          },
          body: JSON.stringify({
-            keyName,
+            keyName: '<?=$keyName?>',
             keyValue,
          })
       });
